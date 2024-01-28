@@ -23,9 +23,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 app.post("/content",upload.single('file'), async (req, res) => {
   try {
-    // const data = new Content(req.body);
-    // const resultData = await data.save();
-    // res.status(200).send(resultData);
     const title=req.body.title;
     const description=req.body.description;
     const authorName=req.body.authorName;
