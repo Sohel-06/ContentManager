@@ -4,11 +4,13 @@ const contentRouter=require("./routes/content")
 const Content = require("./models/content");
 const app = express();
 const cors = require('cors');
-connect();
 const port = process.env.PORT || 8000;
 app.use(cors());
 app.use(express.json());
-
+app.listen(port, () => {
+  console.log(`connection is setup at ${port}`);
+});
+connect();
 app.use('/files',express.static("files"))
 const multer  = require('multer')
 const storage = multer.diskStorage({
@@ -35,6 +37,4 @@ app.post("/content",upload.single('file'), async (req, res) => {
   }
 });
 app.use(contentRouter)
-app.listen(port, () => {
-  console.log(`connection is setup at ${port}`);
-});
+
