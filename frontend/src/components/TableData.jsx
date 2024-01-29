@@ -40,7 +40,7 @@ const TableData = () => {
 
   const getApiData = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/content");
+      const res = await axios.get("https://content-manager-s0ec.onrender.com/content");
       setRows(res.data);
       setData(res.data);
     } catch (e) {
@@ -78,7 +78,7 @@ const TableData = () => {
   // };
   const handleDeleteClick = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/content?id=${id}`);
+      await axios.delete(`https://content-manager-s0ec.onrender.com/content?id=${id}`);
       setIsDeleted(!isDeleted);
     } catch (e) {
       console.log(e);
@@ -142,7 +142,7 @@ const TableData = () => {
                   <TableCell>{row.description}</TableCell>
                   <TableCell>
                     <a
-                      href={`http://localhost:8000/files/${row.file}`}
+                      href={`https://content-manager-s0ec.onrender.com/files/${row.file}`}
                       target="_blank"
                       rel="noreferrer"
                     >

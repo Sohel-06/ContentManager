@@ -42,7 +42,7 @@ const ContentForm = (props) => {
         formData.append("authorName", data["Author Name"]);
         formData.append("email", data.Email);
         formData.append("file", fileValue);
-        await axios.post("http://localhost:8000/content", formData);
+        await axios.post("https://content-manager-s0ec.onrender.com/content", formData);
         setOpen(false);
         setIsNew(!isNew);
       }
