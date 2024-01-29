@@ -21,6 +21,7 @@ import ContentForm from "./ContentForm";
 import axios from "axios";
 import useStyles from "./PageStyles";
 import { columns } from "./constants";
+import Loader from "./Loader";
 
 
 const TableData = () => {
@@ -33,16 +34,18 @@ const TableData = () => {
   const [open, setOpen] = useState(false);
   const [isNew, setIsNew] = useState(false);
   const [searched, setSearched] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     getApiData();
   }, [isDeleted, isNew]);
 
   const getApiData = async () => {
     try {
+      setIsLoading(true);
       const res = await axios.get("https://content-manager-s0ec.onrender.com/content");
       setRows(res.data);
       setData(res.data);
+      setIsLoading(false);
     } catch (e) {
       console.log(e);
     }
@@ -78,8 +81,10 @@ const TableData = () => {
   // };
   const handleDeleteClick = async (id) => {
     try {
+      setIsLoading(true);
       await axios.delete(`https://content-manager-s0ec.onrender.com/content?id=${id}`);
       setIsDeleted(!isDeleted);
+      setIsLoading(false);
     } catch (e) {
       console.log(e);
     }
@@ -183,12 +188,13 @@ const TableData = () => {
           />
         </>
       )}
-        <ContentForm
+       {open &&<ContentForm
           open={open}
           setOpen={setOpen}
           setIsNew={setIsNew}
           isNew={isNew}
-        />
+        />} 
+        <Loader isLoading={isLoading}/>
     </TableContainer>
   );
 };
